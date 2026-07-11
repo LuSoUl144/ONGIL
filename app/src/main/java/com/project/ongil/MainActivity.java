@@ -8,8 +8,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
 public class MainActivity extends AppCompatActivity {
 
     private String role;
@@ -27,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
         bindRoleContent();
         findViewById(R.id.locationShareButton).setOnClickListener(view -> openLocationSharing());
         findViewById(R.id.safeRouteButton).setOnClickListener(view -> openRoutePlans());
-        findViewById(R.id.assistantButton).setOnClickListener(view -> showAssistant());
+        findViewById(R.id.assistantButton).setOnClickListener(view ->
+                startActivity(new Intent(this, AssistantActivity.class)));
         findViewById(R.id.tmapButton).setOnClickListener(view ->
                 Toast.makeText(this, "선택한 픽업존을 TMAP으로 연결할 예정이에요.", Toast.LENGTH_SHORT).show());
     }
@@ -59,16 +58,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, RoutePlansActivity.class));
     }
 
-    private void showAssistant() {
-        boolean isParent = LoginActivity.ROLE_PARENT.equals(role);
-        String message = isParent
-                ? "지금 학원 앞이 혼잡해요. B 픽업존에서 만날까요?"
-                : "오늘은 부모님과 만날까요, 혼자 안전하게 귀가할까요?";
-        new MaterialAlertDialogBuilder(this)
-                .setTitle("온길 도우미")
-                .setMessage(message)
-                .setPositiveButton("추천 보기", (dialog, which) -> openRoutePlans())
-                .setNegativeButton("나중에", null)
-                .show();
-    }
 }
