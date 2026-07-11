@@ -12,6 +12,8 @@
 - 소요 시간과 위험도를 비교하는 안전 경로 플랜 A/B
 - 학부모 모드의 `TMAP으로 안내받기` 연결 자리
 - 상황에 맞춰 먼저 말을 거는 온길 도우미 카드
+- AI 도우미의 `픽업 합류 / 혼자 귀가 / 위치 공유` 의도 분기 목업
+- A/B/C 픽업존 혼잡도 비교와 추천 화면
 
 현재 화면의 지도, 혼잡도와 위치는 발표용 목업입니다. 실제 API 연동 시 화면 코드를 유지하고 데이터 공급 부분만 교체할 수 있도록 기능별 Activity로 분리했습니다.
 
@@ -21,8 +23,11 @@
 app/src/main/java/com/project/ongil/
 ├─ LoginActivity.java          # 로그인 및 역할 선택
 ├─ MainActivity.java           # 지도형 홈과 역할별 기능
+├─ AssistantActivity.java      # 귀가 상황을 묻는 AI 대화 목업
+├─ PickupZoneActivity.java     # 픽업존 혼잡도 비교와 합류 선택
 ├─ LocationShareActivity.java  # 위치 공유 요청/수락 흐름
-└─ RoutePlansActivity.java     # 경로별 시간/위험도 비교
+├─ RoutePlansActivity.java     # 경로별 시간/위험도 비교
+└─ ai/                         # 실제 API로 교체 가능한 AI 클라이언트
 ```
 
 ## 위험도 기준 초안
@@ -39,13 +44,13 @@ PPT에서는 "범죄 예측"보다 **보행 환경 데이터 기반 위험도**�
 
 ## API 키 설정
 
-실제 SK Open API 연동 전 `local.properties.example`을 참고해 개인 PC의 `local.properties`에 키를 추가합니다.
+TMAP 지도 SDK 연동 전 `local.properties.example`을 참고해 개인 PC의 `local.properties`에 키를 추가합니다.
 
 ```properties
-SK_OPEN_API_KEY=replace_with_your_key
+TMAP_APP_KEY=replace_with_your_tmap_key
 ```
 
-`local.properties`는 `.gitignore`에 포함되어 GitHub에 올라가지 않습니다. 모바일 앱에 포함된 키는 추출될 수 있으므로 실제 서비스 단계에서는 사용 제한 설정 또는 서버 프록시를 검토해야 합니다.
+`local.properties`는 `.gitignore`에 포함되어 GitHub에 올라가지 않습니다. 지도 SDK 키는 빌드된 앱에서 추출될 수 있으므로 TMAP 콘솔에서 패키지 제한과 호출량 제한을 설정하고, 교통·경로 REST API는 서버 프록시 사용을 권장합니다.
 
 ## 2인 협업 권장 방식
 
@@ -69,3 +74,19 @@ feature/safe-route-score
 3. TMAP 차량 경로 및 픽업존 연결
 4. 공개 데이터 기반 위험도 계산
 5. 발표용 시나리오 녹화
+
+## AI 연동 방향
+
+현재 `MockAiAssistantClient`가 발표용 응답과 앱 화면 전환을 담당합니다. 실제 AI 연동 시 무료 티어가 제공되는 Gemini Developer API의 `gemini-3.1-flash-lite`를 사용합니다. Android 앱에서 API 키를 직접 보관하지 않고, 별도 백엔드가 Gemini API를 호출하도록 구성합니다.
+
+- 모델: `gemini-3.1-flash-lite`
+- 선택 이유: 무료 입력·출력 티어, 빠른 단순 대화 및 의도 분류
+- 공식 가격표: https://ai.google.dev/gemini-api/docs/pricing
+
+AI는 경로 위험도를 계산하지 않습니다. 사용자 대화를 아래 앱 동작 중 하나로 분류하고, 계산된 데이터 결과를 친근하게 설명합니다.
+
+```text
+OPEN_PICKUP_ZONES
+OPEN_SAFE_ROUTES
+REQUEST_LOCATION_SHARE
+```
