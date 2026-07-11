@@ -3,14 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <queries>
-        <package android:name="com.skt.tmap.ku" />
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <data android:scheme="tmap" />
-        </intent>
-    </queries>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"

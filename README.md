@@ -44,13 +44,13 @@ PPT에서는 "범죄 예측"보다 **보행 환경 데이터 기반 위험도**�
 
 ## API 키 설정
 
-실제 SK Open API 연동 전 `local.properties.example`을 참고해 개인 PC의 `local.properties`에 키를 추가합니다.
+TMAP 지도 SDK 연동 전 `local.properties.example`을 참고해 개인 PC의 `local.properties`에 키를 추가합니다.
 
 ```properties
-SK_OPEN_API_KEY=replace_with_your_key
+TMAP_APP_KEY=replace_with_your_tmap_key
 ```
 
-`local.properties`는 `.gitignore`에 포함되어 GitHub에 올라가지 않습니다. 모바일 앱에 포함된 키는 추출될 수 있으므로 실제 서비스 단계에서는 사용 제한 설정 또는 서버 프록시를 검토해야 합니다.
+`local.properties`는 `.gitignore`에 포함되어 GitHub에 올라가지 않습니다. 지도 SDK 키는 빌드된 앱에서 추출될 수 있으므로 TMAP 콘솔에서 패키지 제한과 호출량 제한을 설정하고, 교통·경로 REST API는 서버 프록시 사용을 권장합니다.
 
 ## 2인 협업 권장 방식
 
