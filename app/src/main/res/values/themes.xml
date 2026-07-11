@@ -10,10 +10,4 @@
     </style>
 
     <style name="Theme.ONGIL" parent="Base.Theme.ONGIL" />
-
-    <style name="Theme.ONGIL.Splash" parent="Base.Theme.ONGIL">
-        <item name="android:statusBarColor">@color/ongil_splash_navy</item>
-        <item name="android:navigationBarColor">@color/ongil_splash_navy</item>
-        <item name="android:windowLightStatusBar">false</item>
-    </style>
 </resources>

@@ -150,6 +150,15 @@
                     android:layout_marginTop="14dp"
                     android:text="TMAP 지도에서 B존 보기"
                     app:cornerRadius="15dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/placeSetupButton"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="10dp"
+                    android:text="집·학원 위치 지정"
+                    app:cornerRadius="15dp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

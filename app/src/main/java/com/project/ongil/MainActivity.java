@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.assistantButton).setOnClickListener(view ->
                 startActivity(new Intent(this, AssistantActivity.class)));
         findViewById(R.id.tmapButton).setOnClickListener(view -> focusPickupZone());
+        findViewById(R.id.placeSetupButton).setOnClickListener(view ->
+                startActivity(new Intent(this, MapSetupActivity.class)));
     }
 
     private void initializeTmap() {
@@ -130,15 +132,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        // TMAP 1.77 sets up its internal GL thread asynchronously after the API
+        // key is validated, so onResume() can fire before that thread exists.
         if (tMapView != null) {
-            tMapView.onResume();
+            try {
+                tMapView.onResume();
+            } catch (Exception ignored) {
+                // GL surface not ready yet; nothing to resume.
+            }
         }
     }
 
     @Override
     protected void onPause() {
         if (tMapView != null) {
-            tMapView.onPause();
+            try {
+                tMapView.onPause();
+            } catch (Exception ignored) {
+                // GL surface not ready yet; nothing to pause.
+            }
         }
         super.onPause();
     }
@@ -146,7 +158,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         if (tMapView != null) {
-            tMapView.destroy();
+            try {
+                tMapView.destroy();
+            } catch (Exception ignored) {
+                // Nothing to release.
+            }
         }
         super.onDestroy();
     }

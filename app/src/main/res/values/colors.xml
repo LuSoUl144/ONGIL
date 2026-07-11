@@ -23,6 +23,4 @@
     <color name="map_parent">#E27A52</color>
     <color name="map_label_background">#EEFFFFFF</color>
     <color name="ongil_input_background">#FFFFFF</color>
-    <color name="ongil_splash_navy">#0B1F67</color>
-    <color name="ongil_splash_blue">#2E73F3</color>
 </resources>
