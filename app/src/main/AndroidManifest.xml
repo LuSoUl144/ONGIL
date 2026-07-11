@@ -2,6 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <queries>
+        <package android:name="com.skt.tmap.ku" />
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="tmap" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,20 +21,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ONGIL">
-        <activity android:name=".AssistantActivity" />
-        <activity android:name=".PickupZoneActivity" />
-        <activity android:name=".RoutePlansActivity" />
-        <activity android:name=".LocationShareActivity" />
-        <activity android:name=".MainActivity" />
         <activity
-            android:name=".LoginActivity"
-            android:exported="true">
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ONGIL.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AssistantActivity" />
+        <activity android:name=".PickupZoneActivity" />
+        <activity android:name=".RoutePlansActivity" />
+        <activity android:name=".LocationShareActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".LoginActivity" />
     </application>
 
 </manifest>

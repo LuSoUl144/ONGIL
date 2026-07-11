@@ -51,12 +51,14 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="ONGIL 로고"
-                android:src="@drawable/ongil_logo_day" />
+            <TextView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_avatar"
+                android:gravity="center"
+                android:text="ON"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <FrameLayout

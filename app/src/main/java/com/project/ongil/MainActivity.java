@@ -27,8 +27,18 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.safeRouteButton).setOnClickListener(view -> openRoutePlans());
         findViewById(R.id.assistantButton).setOnClickListener(view ->
                 startActivity(new Intent(this, AssistantActivity.class)));
-        findViewById(R.id.tmapButton).setOnClickListener(view ->
-                Toast.makeText(this, "선택한 픽업존을 TMAP으로 연결할 예정이에요.", Toast.LENGTH_SHORT).show());
+        findViewById(R.id.tmapButton).setOnClickListener(view -> {
+            boolean opened = TmapNavigationLauncher.openRoute(
+                    this,
+                    "대치동 B 픽업존",
+                    37.50055,
+                    127.06069
+            );
+            if (!opened) {
+                Toast.makeText(this, "TMAP 앱을 설치한 뒤 길안내를 시작할 수 있어요.",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void bindRoleContent() {
