@@ -77,7 +77,11 @@ feature/safe-route-score
 
 ## AI 연동 방향
 
-현재 `MockAiAssistantClient`가 발표용 응답과 앱 화면 전환을 담당합니다. 실제 AI 연동 시 Android 앱에서 OpenAI API를 직접 호출하지 않고, 별도 백엔드가 Responses API를 호출하도록 구성합니다.
+현재 `MockAiAssistantClient`가 발표용 응답과 앱 화면 전환을 담당합니다. 실제 AI 연동 시 무료 티어가 제공되는 Gemini Developer API의 `gemini-3.1-flash-lite`를 사용합니다. Android 앱에서 API 키를 직접 보관하지 않고, 별도 백엔드가 Gemini API를 호출하도록 구성합니다.
+
+- 모델: `gemini-3.1-flash-lite`
+- 선택 이유: 무료 입력·출력 티어, 빠른 단순 대화 및 의도 분류
+- 공식 가격표: https://ai.google.dev/gemini-api/docs/pricing
 
 AI는 경로 위험도를 계산하지 않습니다. 사용자 대화를 아래 앱 동작 중 하나로 분류하고, 계산된 데이터 결과를 친근하게 설명합니다.
 

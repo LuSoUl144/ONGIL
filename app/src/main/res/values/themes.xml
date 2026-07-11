@@ -4,7 +4,6 @@
         <item name="colorPrimary">@color/ongil_primary</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/ongil_secondary</item>
-        <item name="android:fontFamily">sans</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">@color/ongil_surface</item>
         <item name="android:navigationBarColor">@color/ongil_surface</item>
